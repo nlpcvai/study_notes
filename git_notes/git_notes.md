@@ -167,8 +167,13 @@ sudo ln -s /usr/local/p4v/bin/p4merge /usr/local/bin/p4merge
 [user]
 	name = Mason
 	email = pubuliuyun@163.com
+[http]
+	proxy = http://127.0.0.1:3213
+	sslverify = false
+
 [https]
 	proxy = http://127.0.0.1:3213
+	sslverify = false
 [diff]
 	tool = p4merge
 [difftool "p4merge"]
