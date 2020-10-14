@@ -188,6 +188,43 @@ Codename:	xenial
 ``` shell
 sudo find . -type f -exec chown mason.mason {} \;
 sudo find . -type d -exec chown mason.mason {} \;
+
+Unix-like operating systems decouple the user name from the user identity, so you may safely change the name without affecting the ID. All permissions, files, etc are tied to your identity (uid), not your username.
+
+To manage every aspect of the user database, you use the usermod tool.
+
+To change username (it is probably best to do this without being logged in):
+
+sudo usermod -l newUsername oldUsername
+This however, doesn't rename the home folder.
+
+To change home-folder, use
+
+sudo usermod -d /home/newHomeDir -m newUsername
+after you changed the username.
+
+For instance, you could logout, drop to a console (Ctrl+Alt+F1), and sudo su - to become true root (as opposed to sudo -s, where $HOME is still /home/yourname.) Maybe you also have to kill some still running processes from this user first. To do so, enter ps -u username, look for the matching PID and kill them by kill PID-number.
+
+Update: as arrange mentioned, some files may reference your old home directory. You can either keep a symlink for backward compatibility, e g ln -s /home/newname /home/oldname or you can change the file contents with sed -i.bak 's/*oldname*/*newname*/g' *list of files* It creates a backup for each file with a .bak extension.
+
+Some additional information for not so experienced users like me:
+As I only have ONE user account (administrator), it would not let me change the username ("you are already logged in" was the response in TTY1 (Ctrl+Alt+F1). To get around this:
+
+Login with your old credentials and add a new user, e.g. "temporary" in TTY1:
+
+sudo adduser temporary
+set the password.
+
+Allow the temporary user to run sudo by adding the user to sudo group:
+
+sudo adduser temporary sudo
+Log out with the command exit.
+Return to tty1: Login with the 'temporary' user account and password. Change your username and folder as mentioned above. exit (until you get the login prompt)
+Go back to TTY7 (Ctrl+Alt+F7) to login on the GUI/normal desktop screen and see if this works.
+Delete temporary user and folder:
+
+sudo deluser temporary
+sudo rm -r /home/temporary
 ```
 ###### Install Rtree
 ``` shell
