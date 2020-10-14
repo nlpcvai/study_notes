@@ -227,6 +227,13 @@ win10 cannot access ubuntu share folder after several minutes, the error message
 #S
 sudo ufw disable
 Append "security = share" to the "/etc/samba/smb.conf" file.
+#E
+dpkg: error: dpkg frontend is locked by another process
+#S
+sudo apt-get install -f
+#查看哪個LOCK
+sudo rm /var/lib/dpkg/lock-frontend
+sudo apt-get install -f
 ```
 
 ##### Question & Answer
