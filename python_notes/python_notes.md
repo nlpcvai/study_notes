@@ -27,6 +27,7 @@ sha256sum Anaconda3-2020.07-Linux-x86_64.sh
 
 conda config --set remote_read_timeout_secs 1000
 
+conda install -c conda-forge conda-pack
 conda pack -n my_env
 mkdir -p home/miniconda3/my_env
 tar -xzf my_env.tar.gz -C home/miniconda3/my_env
