@@ -341,4 +341,8 @@ $ sudo ufw allow from any to any port 3389 proto tcp
 From time to time I have received a black screen after initiating the remote connection to the Xrdp Remote Desktop Protocol (RDP) server. Although I'm not sure how to completely resolve this issue but logging out from the Ubuntu desktop prior to making a remote connection have solved it at least temporarily.
 ```
 
+##### zip
+``` shell
+for i in */; do zip -rm "${i%/}.zip" "$i"; done
+```
 ​      
