@@ -81,3 +81,4 @@ Or
 docker run --name my_first_gpu_container --gpus '"device=0"' nvidia/cuda
 ```
 
+sudo fuser -v /dev/nvidia*
