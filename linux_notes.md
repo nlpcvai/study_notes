@@ -9,6 +9,20 @@ cd /usr/bin
 ln -s /usr/local/bin/lrz rz
 ln -s /usr/local/bin/lsz sz
 ```
+### xrdp black screen solution
+``` shell
+Xrdp shows a blank screen with Ubuntu 18.04, Bionic Beaver
+If you are trying to use remote desktop on Ubuntu or Xubuntu 18.04 you may find that after logging in all you see is a blank screen.
+
+One cause of this is that xfce4 has added code that prevents a second session from opening. You will find that if your computer's main screen is logged into xfce4 you may not be able to use it with xrdp.
+
+To solve this "second session" problem and allow as many sessions as you need, edit /etc/xrdp/startwm.sh and add these lines before the lines that test and execute Xsession. The $HOME/.profile is not part of the solution, but is something that should be run before starting the session anyway.
+
+unset DBUS_SESSION_BUS_ADDRESS
+unset XDG_RUNTIME_DIR
+. $HOME/.profile
+```
+
 ###### Add user
 ``` shell
 sudo useradd -s /path/to/shell -d /home/{dirname} -m -G {secondary-group} {username}
